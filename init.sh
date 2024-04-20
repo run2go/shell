@@ -63,6 +63,9 @@ install_dependencies() {
     fi
 }
 
+# Move to home dir
+cd ~
+
 # Invoke sudo usage if missing
 if [ "$(id -u)" -ne 0 ]; then
     exec sudo "$0" "$@"
