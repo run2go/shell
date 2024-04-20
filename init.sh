@@ -49,15 +49,15 @@ init_zsh() {
 
 install_dependencies() {
     if [ -x "$(command -v apk)" ]; then
-        sudo apk add --no-cache "$@"
+        apk add --no-cache "$@"
     elif [ -x "$(command -v apt-get)" ]; then
-        sudo apt-get install "$@"
+        apt-get install "$@"
     elif [ -x "$(command -v dnf)" ]; then
-        sudo dnf install "$@"
+        dnf install "$@"
     elif [ -x "$(command -v pacman)" ]; then
-        sudo pacman -s "$@"
+        pacman -s "$@"
     elif [ -x "$(command -v zypper)" ]; then
-        sudo zypper install "$@"
+        zypper install "$@"
     else
         echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: '$@'">&2;
     fi
