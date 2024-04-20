@@ -6,16 +6,16 @@ A minimal shell script that leverages the `~/.profile` file.<br>
 - Advanced prompt
 
 ## _bash (lightweight & fast)_
-A small shell script that leverages the `~/.bashrc` file.<br>
+A small shell script that updates the `~/.bashrc` file.<br>
 - Timestamps
 - Expressive prompt
 - Color support
 - Terminal titles
 
 ## _zsh (advanced & interactive)_
-A minimal shell script that leverages the `/etc/profile` file.<br>
+Advanced shell with interactive functionality.<br>
 - Timestamps
-- Expressive prompt
+- Interactive prompt
 - Color support
 - Terminal titles
 - Interactive auto completion
