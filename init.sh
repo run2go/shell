@@ -64,7 +64,7 @@ install_dependencies() {
 }
 
 # Invoke sudo usage if missing
-if [[ "$(id -u)" -ne 0 ]]; then
+if [ "$(id -u)" -ne 0 ]; then
     exec sudo "$0" "$@"
     exit $?
 fi
