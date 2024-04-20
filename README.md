@@ -25,5 +25,5 @@ A minimal shell script that leverages the `/etc/profile` file.<br>
 ## Setup
 Retrieve the latest init.sh and execute it using `/bin/sh`
 ```sh
-wget -O - https://raw.githubusercontent.com/run2go/shell/init.sh | sh
+wget -O - https://raw.githubusercontent.com/run2go/shell/main/init.sh | sh
 ```
