@@ -23,7 +23,7 @@ A minimal shell script that leverages the `/etc/profile` file.<br>
 - Zoxide CD substitute
 
 ## Setup
-Retrieve the latest tunnel.sh and store it in `/usr/local/bin/`
+Retrieve the latest init.sh and execute it using `/bin/sh`
 ```sh
-sudo bash -c "wget https://raw.githubusercontent.com/run2go/tunnel/main/tunnel.sh -O /usr/local/bin/tunnel.sh"
+wget -O - https://raw.githubusercontent.com/run2go/shell/init.sh | sh
 ```
