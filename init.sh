@@ -75,7 +75,7 @@ if [ ! -z "$1" ]; then
 else
     # Prompt the user to enter a number
     echo "Enter a number (1, 2, or 3):"
-    read number  # Wait for 5 seconds for user input before auto proceeding
+    read number
     if [ -z "$number" ]; then
         number=1
     fi
