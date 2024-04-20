@@ -4,16 +4,12 @@
 init_sh() {
     install_dependencies curl
 
-    curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/sh/shrc -o ~/.profile
-
     curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/sh/shrc -o ~/.shrc
     . ~/.shrc
 }
 
 init_bash() {
     install_dependencies curl bash vim bash jq git htop
-
-    curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/sh/shrc -o ~/.profile
 
     curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/bash/bashrc -o ~/.bashrc
     curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/zsh/vimrc -o ~/.vimrc
@@ -22,8 +18,6 @@ init_bash() {
 
 init_zsh() {
     install_dependencies curl bash vim zsh jq git htop coreutils g++ make build-essential
-    
-    curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/sh/shrc -o ~/.profile
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     #(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /root/.bashrc
@@ -61,7 +55,7 @@ install_dependencies() {
     elif [ -x "$(command -v dnf)" ]; then
         sudo dnf install "$@"
     elif [ -x "$(command -v pacman)" ]; then
-        sudo pacman install "$@"
+        sudo pacman -s "$@"
     elif [ -x "$(command -v zypper)" ]; then
         sudo zypper install "$@"
     else
@@ -69,6 +63,13 @@ install_dependencies() {
     fi
 }
 
+# Invoke sudo usage if missing
+if [[ "$(id -u)" -ne 0 ]]; then
+    exec sudo "$0" "$@"
+    exit $?
+fi
+
+# Use transfer parameter if given
 if [ ! -z "$1" ]; then
     number=$1
 else
@@ -76,7 +77,7 @@ else
     echo "Enter a number (1, 2, or 3):"
     read number  # Wait for 5 seconds for user input before auto proceeding
     if [ -z "$number" ]; then
-        number=1  # Default to option 1
+        number=1
     fi
 fi
 
