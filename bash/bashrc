@@ -100,7 +100,7 @@ fi
 # cat substitution
 if [ -x "$(command -v batcat)" ]; then
     alias cat='batcat'
-elif [ -x "$(command -d bat)" ]; then
+elif [ -x "$(command -v bat)" ]; then
     alias cat='bat'
 fi
 
