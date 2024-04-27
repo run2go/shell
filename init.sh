@@ -35,7 +35,7 @@ init_bash() {
     esac
 
     # Construct new prompt
-    prompt="\[\e[2m\][\t] \[\e$prompt_user\u\[\e[0;2m\]@\[\e$prompt_host\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]❯\[\e[0m\] "
+    prompt="'\[\e[2m\][\t] \[\e$prompt_user\u\[\e[0;2m\]@\[\e$prompt_host\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]❯\[\e[0m\] '"
     # Update PS1 prompt in bashrc file
     sed -i "s/^\(DEFAULT_PROMPT\s*=\s*\).*\$/\1$prompt/" ~/.bashrc
 }
