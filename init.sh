@@ -91,14 +91,15 @@ desired_machine=$2
 # Determine desired shell
 while [ -z "$desired_shell" ]; do
     echo "Shell selection: sh (1), bash (2), zsh (3)"
-    read desired_shell
+    read -r desired_shell < /dev/tty
 done
 
 # Determine machine type
 while [ -z "$desired_machine" ]; do
     echo "Server selection: local (1), vm (2), development (3), production (4)"
-    read desired_machine
+    read -r desired_machine < /dev/tty
 done
+
 
 # Determine if user is root
 if [ "$(id -u)" -eq 0 ]; then
