@@ -17,14 +17,14 @@ init_bash() {
     curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/vim/vimrc -o ~/.vimrc
     curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/bash/bashrc -o ~/.bashrc
     . ~/.bashrc
-
+    
     # Decide on machine type
     case $2 in
         1) prompt_user='[0;1;38;5;197m\]';; #root
         2) prompt_user='[0;1;38;5;209m\]';; #user
         *) echo "Invalid machine: '$2'";;
     esac
-
+    
     # Decide on user type
     case $1 in
         1) prompt_host='[0;1;38;5;113m\]';; #local
@@ -35,9 +35,32 @@ init_bash() {
     esac
 
     # Construct new prompt
-    prompt="'\[\e[2m\][\t] \[\e$prompt_user\u\[\e[0;2m\]@\[\e$prompt_host\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]❯\[\e[0m\] '"
+    prompt_header='\[\e[2m\][\t] \[\e'
+    prompt_center='\u\[\e[0;2m\]@\[\e'
+    prompt_tail='\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]❯\[\e[0m\] '
+
+    prompt="$prompt_header$prompt_user$prompt_center$prompt_host$prompt_tail"
+
     # Update PS1 prompt in bashrc file
-    sed -i "s/^\(DEFAULT_PROMPT\s*=\s*\).*\$/\1$prompt/" ~/.bashrc
+    #sed -i 's#^\(DEFAULT_PROMPT\s*=\s*\).*\$#\1'"$prompt"'#' ~/.bashrc
+
+    # Construct new bashrc file
+    echo "#!/bin/bash" > ~/.bashrc_new
+    curl -fsSL "https://raw.githubusercontent.com/run2go/shell/main/bash/bashrc_1" > ~/.bashrc_new
+    echo "DEFAULT_PROMPT='$prompt'" >> ~/.bashrc_new
+    curl -fsSL "https://raw.githubusercontent.com/run2go/shell/main/bash/bashrc_2" >> ~/.bashrc_new
+    curl -fsSL "https://raw.githubusercontent.com/run2go/shell/main/aliases" >> ~/.bashrc_new
+    curl -fsSL "https://raw.githubusercontent.com/run2go/shell/main/bash/bashrc_3" >> ~/.bashrc_new
+
+    # Check syntax of the new bashrc file
+    if bash -n ~/.bashrc_new; then
+        mv ~/.bashrc ~/.bashrc_old # Preserve original
+        mv ~/.bashrc_new ~/.bashrc # Update bashrc
+    else
+        echo "Syntax error in the generated '.bashrc_new' file."
+    fi
+    #echo "'\[\e[2m\][\t] \[\e[0;1;38;5;209m\]\u\[\e[0;2m\]@\[\e[0;1;38;5;215m\]\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]❯\[\e[0m\] '"
+    #echo "'$prompt'"
 }
 
 init_zsh() {
