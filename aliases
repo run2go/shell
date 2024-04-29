@@ -1,0 +1,70 @@
+# Aliases
+# ls directory display
+if [ -x "$(command -v lsd)" ]; then
+    alias ls='lsd'
+    alias la='lsd -la'
+fi
+# ranger file explorer
+if [ -x "$(command -v ranger)" ]; then
+    alias r='ranger'
+fi
+# fuzzy find
+if [ -x "$(command -v fzf)" ]; then
+    alias f='fzf'
+fi
+# cat substitution
+if [ -x "$(command -v batcat)" ]; then
+    alias cat='batcat'
+elif [ -x "$(command -v bat)" ]; then
+    alias cat='bat'
+fi
+
+# Package managers
+if [ -x "$(command -v apk)" ]; then
+    alias apk='sudo apk'
+elif [ -x "$(command -v apt-get)" ]; then
+    alias apt='sudo apt'
+elif [ -x "$(command -v dnf)" ]; then
+    alias dnf='sudo dnf'
+elif [ -x "$(command -v zypper)" ]; then
+    alias zypper='sudo zypper'
+fi
+
+# Containerization software
+if [ -x "$(command - docker)" ]; then
+    alias docker='sudo docker'
+    alias pa='sudo docker ps -a'
+elif [ -x "$(command - podman)" ]; then
+    alias docker='sudo podman'
+    alias pa='sudo podman ps -a'
+fi
+
+# lazydocker & lazygit
+if [ -x "$(command - lazydocker)" ]; then
+    alias d='lazydocker'
+fi
+
+if [ -x "$(command - lazygit)" ]; then
+    alias g='lazygit'
+fi
+
+# CF quick tunnel
+if [ ! -f /usr/local/bin/tunnel.sh ]; then
+    alias tunnel='sudo /usr/local/bin/tunnel.sh'
+fi
+
+# General aliases
+alias la='ls -la'
+
+# Add an "alert" alias for long running commands. Use like so: sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+
+# quick connect function for ssh access
+function connect {
+  case "$1" in
+    "server1") ssh root@localhost -p 22;;
+    "server2") ssh user@10.10.10.2 -p 1344;;
+    *) echo "Unknown Connection '$1'";;
+  esac
+}
