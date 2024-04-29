@@ -127,12 +127,21 @@ elif [ -x "$(command -v zypper)" ]; then
 fi
 
 # Containerization software
-if docker -v &>/dev/null; then
+if [ -x "$(command - docker)" ]; then
     alias docker='sudo docker'
     alias pa='sudo docker ps -a'
-elif podman -v &>/dev/null; then
+elif [ -x "$(command - podman)" ]; then
     alias docker='sudo podman'
     alias pa='sudo podman ps -a'
+fi
+
+# lazydocker & lazygit
+if [ -x "$(command - lazydocker)" ]; then
+    alias d='lazydocker'
+fi
+
+if [ -x "$(command - lazygit)" ]; then
+    alias g='lazygit'
 fi
 
 # CF quick tunnel
@@ -150,15 +159,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
-# quick connect function for ssh access
-function connect {
-  case "$1" in
-    "server1") ssh root@localhost -p 22;;
-    "server2") ssh user@10.10.10.2 -p 1344;;
-    *) echo "Unknown Connection '$1'";;
-  esac
-}
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
