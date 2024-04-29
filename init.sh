@@ -132,6 +132,9 @@ fi
 # Overwrite default profile file
 wget -q https://raw.githubusercontent.com/run2go/shell/main/profile -O ~/.profile
 
+# Aqcuire latest aliases file
+wget -q https://raw.githubusercontent.com/run2go/shell/main/aliases -O ~/.aliases
+
 # Initialize & configure shell
 case $desired_shell in
     1) init_sh $desired_machine $desired_user;;
