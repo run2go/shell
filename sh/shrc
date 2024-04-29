@@ -6,11 +6,3 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
-# quick connect function for ssh access
-function connect {
-  case "$1" in
-    "server1") ssh root@localhost -p 22;;
-    "server2") ssh user@10.10.10.2 -p 1344;;
-    *) echo "Unknown Connection '$1'";;
-  esac
-}
