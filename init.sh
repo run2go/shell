@@ -5,6 +5,7 @@
 
 # Function definitions
 init_sh() {
+    desired_shell_name='/bin/sh'
     install_dependencies curl
 
     # Load latest shrc file
@@ -13,6 +14,7 @@ init_sh() {
 }
 
 init_bash() {
+    desired_shell_name='/bin/bash'
     install_dependencies curl bash vim bash sed jq git htop
 
     # Load vimrc config
@@ -48,23 +50,26 @@ init_bash() {
 }
 
 init_zsh() {
+    desired_shell_name='/bin/zsh'
     install_dependencies curl bash
 
     bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 install_dependencies() {
+    echo "Installing Packages: '$@'"
+
     if [ -x "$(command -v apk)" ]; then
         if [ "$(id -u)" -eq 0 ]; then
-            apk add --no-cache "$@"
+            apk add --quiet --no-progress --no-cache "$@"
         else
-            sudo apk add --no-cache "$@"
+            sudo apk add --quiet --no-progress --no-cache "$@"
         fi
     elif [ -x "$(command -v apt-get)" ]; then
         if [ "$(id -u)" -eq 0 ]; then
-            apt-get install "$@"
+            apt-get -qq install "$@"
         else
-            sudo apt-get install "$@"
+            sudo apt-get -qq install "$@"
         fi
     elif [ -x "$(command -v dnf)" ]; then
         if [ "$(id -u)" -eq 0 ]; then
@@ -98,12 +103,22 @@ desired_machine=$2
 while [ -z "$desired_shell" ]; do
     echo "Shell selection: sh (1), bash (2), zsh (3)"
     read -r desired_shell < /dev/tty
+    
+    # Check if input is numeric
+    case $desired_shell in
+        ''|*[!0-9]*) desired_shell="" ;;
+    esac
 done
 
 # Determine machine type
 while [ -z "$desired_machine" ]; do
     echo "Server selection: local (1), vm (2), development (3), production (4)"
     read -r desired_machine < /dev/tty
+
+    # Check if input is numeric
+    case $desired_machine in
+        ''|*[!0-9]*) desired_machine="" ;;
+    esac
 done
 
 
@@ -115,7 +130,7 @@ else
 fi
 
 # Overwrite default profile file
-wget https://raw.githubusercontent.com/run2go/shell/main/profile -O ~/.profile
+wget -q https://raw.githubusercontent.com/run2go/shell/main/profile -O ~/.profile
 
 # Initialize & configure shell
 case $desired_shell in
@@ -124,3 +139,11 @@ case $desired_shell in
     2) init_zsh;;
     *) echo "Invalid shell selection: '$desired_shell'" ;;
 esac
+
+
+echo "
+### ### ### ### ### ### ### ### ### ### ### ###
+> Use 'chsh -s $desired_shell_name' to set default shell
+> Load changes by entering '$desired_shell_name'
+### ### ### ### ### ### ### ### ### ### ### ###
+"
