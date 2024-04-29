@@ -40,11 +40,6 @@ init_bash() {
     # Construct new prompt
     prompt='\\[\\e[2m\\][\\t] '$prompt_user'\\u\\[\\e[0;2m\\]@\\[\\e[0;2m\\]'$prompt_host'\\H\\[\\e[0;2m\\]:\\[\\e[0;38;5;105m\\]\\w\\[\\e[0m\\] \\[\\e[38;5;215m\\]»\\[\\e[0m\\] '
     
-    #prompt_header='\[\e[2m\][\t] \[\e'
-    #prompt_center='\u\[\e[0;2m\]@\[\e'
-    #prompt_tail='\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]»\[\e[0m\] '
-    #prompt="'$prompt_header$prompt_user$prompt_center$prompt_host$prompt_tail'"
-
     # Update PS1 prompt in bashrc file
     sed -i "0,/^DEFAULT_PROMPT='.*'/s//DEFAULT_PROMPT='$prompt'/" ~/.bashrc
 
@@ -98,7 +93,6 @@ install_dependencies() {
 # Use transfer parameter if provided
 desired_shell=$1
 desired_machine=$2
-#desired_user=$3
 
 # Determine desired shell
 while [ -z "$desired_shell" ]; do
