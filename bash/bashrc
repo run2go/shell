@@ -9,7 +9,7 @@ case $- in
 esac
 
 #Default prompt
-DEFAULT_PROMPT='\[\e[2m\][\t] \[\e[0;1;38;5;209m\]\u\[\e[0;2m\]@\[\e[0;1;38;5;215m\]\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]❯\[\e[0m\] '
+DEFAULT_PROMPT='\[\e[2m\][\t] \[\e[0;1;38;5;209m\]\u\[\e[0;2m\]@\[\e[0;1;38;5;215m\]\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]»\[\e[0m\] '
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -46,7 +46,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -67,12 +67,13 @@ else
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}{$PS1_PROMPT}'
-    #PS1='${debian_chroot:+($debian_chroot)}\[\e[2m\][\t] \[\e[0;1;38;5;209m\]\u\[\e[0;2m\]@\[\e[0;1;38;5;215m\]\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]❯\[\e[0m\] '
+    PS1="${debian_chroot:+($debian_chroot)}${PS1_PROMPT}"
+    #PS1='${debian_chroot:+($debian_chroot)}\[\e[2m\][\t] \[\e[0;1;38;5;209m\]\u\[\e[0;2m\]@\[\e[0;1;38;5;215m\]\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]»\[\e[0m\] '
 else
-    PS1='${debian_chroot:+($debian_chroot)}[\t] \u@\H:\w » '
+    PS1="${debian_chroot:+($debian_chroot)}[\t] \u@\H:\w » "
 fi
 unset color_prompt force_color_prompt
+
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -127,20 +128,20 @@ elif [ -x "$(command -v zypper)" ]; then
 fi
 
 # Containerization software
-if [ -x "$(command - docker)" ]; then
+if [ -x "$(command -v docker)" ]; then
     alias docker='sudo docker'
     alias pa='sudo docker ps -a'
-elif [ -x "$(command - podman)" ]; then
+elif [ -x "$(command -v podman)" ]; then
     alias docker='sudo podman'
     alias pa='sudo podman ps -a'
 fi
 
 # lazydocker & lazygit
-if [ -x "$(command - lazydocker)" ]; then
+if [ -x "$(command -v lazydocker)" ]; then
     alias d='lazydocker'
 fi
 
-if [ -x "$(command - lazygit)" ]; then
+if [ -x "$(command -v lazygit)" ]; then
     alias g='lazygit'
 fi
 
