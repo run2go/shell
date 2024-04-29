@@ -1,29 +1,16 @@
 # Shell prompt
 PS1='${debian_chroot:+($debian_chroot)}[$(date "+%T")] $(whoami)@$(hostname):$(pwd) » '
 
-# Aliases
-# ls directory display
-if [ -x "$(command -v lsd)" ]; then
-    alias ls='lsd'
-    alias la='lsd -la'
-fi
-# cat substitution
-if [ -x "$(command -v batcat)" ]; then
-    alias cat='batcat'
-elif [ -x "$(command -v bat)" ]; then
-    alias cat='bat'
+# general aliases support
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
 fi
 
-# Package managers
-if [ -x "$(command -v apk)" ]; then
-    alias apk='sudo apk'
-elif [ -x "$(command -v apt-get)" ]; then
-    alias apt='sudo apt'
-elif [ -x "$(command -v dnf)" ]; then
-    alias dnf='sudo dnf'
-elif [ -x "$(command -v zypper)" ]; then
-    alias zypper='sudo zypper'
-fi
-
-# General aliases
-alias la='ls -la'
+# quick connect function for ssh access
+function connect {
+  case "$1" in
+    "server1") ssh root@localhost -p 22;;
+    "server2") ssh user@10.10.10.2 -p 1344;;
+    *) echo "Unknown Connection '$1'";;
+  esac
+}
