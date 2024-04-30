@@ -1,8 +1,5 @@
 #!/bin/sh
 
-#default prompt
-#'\[\e[2m\][\t] \[\e[0;1;38;5;209m\]\u\[\e[0;2m\]@\[\e[0;1;38;5;215m\]\H\[\e[0;2m\]:\[\e[0;38;5;105m\]\w\[\e[0m\] \[\e[38;5;215m\]»\[\e[0m\] '
-
 # Function definitions
 init_sh() {
     desired_shell_name='/bin/sh'
@@ -10,6 +7,31 @@ init_sh() {
 
     # Load latest shrc file
     curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/sh/shrc -o ~/.shrc
+
+    #PS1='[$(date "+%T")] $(whoami)@$(hostname):$(pwd) » '
+
+    # Decide on machine type
+    case $2 in
+        1) prompt_user='<$(whoami)>' ;; #root
+        2) prompt_user='$(whoami)' ;; #user
+        *) echo "Invalid machine: '$2'" ;;
+    esac
+
+    # Decide on user type
+    case $1 in
+        1) prompt_host='»' ;; #local
+        2) prompt_host='~»' ;; #vm
+        3) prompt_host='~>' ;; #dev
+        4) prompt_host='>>' ;; #prod
+        *) echo "Invalid user: '$1'" ;;
+    esac
+
+    # Construct new prompt
+    prompt='[$(date "+%T")] '$prompt_user'@$(hostname):$(pwd) '$prompt_host' '
+    
+    # Update PS1 prompt in shrc file
+    sed -i "0,/^PS1='.*'/s//PS1='$prompt'/" ~/.shrc
+
     . ~/.shrc
 }
 
@@ -40,7 +62,7 @@ init_bash() {
     esac
 
     # Construct new prompt
-    prompt='\\[\\e[2m\\][\\t] '$prompt_user'\\u\\[\\e[0;2m\\]@\\[\\e[0;2m\\]'$prompt_host'\\H\\[\\e[0;2m\\]:\\[\\e[0;38;5;105m\\]\\w\\[\\e[0m\\] \\[\\e[38;5;215m\\]»\\[\\e[0m\\] '
+    prompt='\\[\\e[2m\\][\\t] '$prompt_user'\\u\\[\\e[0;2m\\]@\\[\\e[0;2m\\]'$prompt_host'\\H\\[\\e[0;2m\\]:\\[\\e[0;38;5;105m\\]\\w\\[\\e[0m\\] '$prompt_host'»\\[\\e[0m\\] '
     
     # Update PS1 prompt in bashrc file
     sed -i "0,/^DEFAULT_PROMPT='.*'/s//DEFAULT_PROMPT='$prompt'/" ~/.bashrc
@@ -53,7 +75,7 @@ init_zsh() {
     desired_shell_name='/bin/zsh'
     install_dependencies curl bash
 
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/zsh/setup.sh)"
 }
 
 install_dependencies() {
@@ -67,27 +89,27 @@ install_dependencies() {
         fi
     elif [ -x "$(command -v apt-get)" ]; then
         if [ "$(id -u)" -eq 0 ]; then
-            apt-get -qq install "$@"
+            apt-get -qq -y install "$@"
         else
-            sudo apt-get -qq install "$@"
+            sudo apt-get -qq -y install "$@"
         fi
     elif [ -x "$(command -v dnf)" ]; then
         if [ "$(id -u)" -eq 0 ]; then
-            dnf install "$@"
+            dnf -q -y install "$@"
         else
-            sudo dnf install "$@"
+            sudo dnf -q -y install "$@"
         fi
     elif [ -x "$(command -v pacman)" ]; then
         if [ "$(id -u)" -eq 0 ]; then
-            pacman -S "$@"
+            pacman --noconfirm --quiet -S "$@"
         else
-            sudo pacman -S "$@"
+            sudo pacman --noconfirm --quiet -S "$@"
         fi
     elif [ -x "$(command -v zypper)" ]; then
         if [ "$(id -u)" -eq 0 ]; then
-            zypper install "$@"
+            zypper install -q -n "$@"
         else
-            sudo zypper install "$@"
+            sudo zypper install -q -n "$@"
         fi
     else
         echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: '$@'">&2;
@@ -137,9 +159,9 @@ wget -q https://raw.githubusercontent.com/run2go/shell/main/aliases -O ~/.aliase
 
 # Initialize & configure shell
 case $desired_shell in
-    1) init_sh $desired_machine $desired_user;;
-    2) init_bash $desired_machine $desired_user;;
-    2) init_zsh;;
+    1) init_sh $desired_machine $desired_user ;;
+    2) init_bash $desired_machine $desired_user ;;
+    3) init_zsh $desired_machine $desired_user ;;
     *) echo "Invalid shell selection: '$desired_shell'" ;;
 esac
 
