@@ -1,5 +1,5 @@
 # Shell prompt
-PS1='${debian_chroot:+($debian_chroot)}[$(date "+%T")] $(whoami)@$(hostname):$(pwd) » '
+PS1='[$(date "+%T")] $(whoami)@$(hostname):$(pwd) » '
 
 # general aliases support
 if [ -f ~/.aliases ]; then
