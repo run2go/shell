@@ -34,7 +34,7 @@ fi
 # Package managers
 if [ -x "$(command -v apk)" ]; then
     alias apk='sudo apk'
-elif [ -x "$(command -v apt-get)" ]; then
+elif [ -x "$(command -v apt)" ]; then
     alias apt='sudo apt'
 elif [ -x "$(command -v dnf)" ]; then
     alias dnf='sudo dnf'
@@ -72,4 +72,3 @@ alias v='vi'
 
 # Add an "alert" alias for long running commands. Use like so: sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
