@@ -1,5 +1,16 @@
 # Shell Environments
 
+## Aliases Overview
+| Alias | Command |
+| --- | --- |
+| f | fzf |
+| r | ranger |
+| c | cat/batcat |
+| v | vi/vim |
+| g | lazygiyt |
+| d | lazydocker |
+| pa | docker/podman ps -a |
+
 ## _sh (minimal & robust)_
 A minimal shell script that leverages the `~/.profile` file.<br>
 - Timestamps
