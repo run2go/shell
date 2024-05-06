@@ -25,7 +25,8 @@ install_dependencies curl bash vim zsh jq git htop coreutils g++ make build-esse
 
 curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/zsh/zshrc -o ~/.zshrc
 curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/zsh/zshenv -o ~/.zshenv
-curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/zsh/vimrc -o ~/.vimrc
+curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/config/vimrc -o ~/.vimrc
+curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/config/rc.conf -o ~/.config/ranger/rc.conf
 
 brew install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
