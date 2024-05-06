@@ -7,7 +7,7 @@
 | r | ranger |
 | c | cat/batcat |
 | v | vi/vim |
-| g | lazygiyt |
+| g | lazygit |
 | d | lazydocker |
 | pa | docker/podman ps -a |
 
