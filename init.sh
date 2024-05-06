@@ -40,7 +40,7 @@ init_bash() {
     install_dependencies curl bash vim bash sed jq git htop
 
     # Load vimrc config
-    curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/vim/vimrc -o ~/.vimrc
+    curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/config/vimrc -o ~/.vimrc
 
     # Load latest bashrc file
     curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/bash/bashrc -o ~/.bashrc
@@ -152,10 +152,10 @@ else
 fi
 
 # Overwrite default profile file
-wget -q https://raw.githubusercontent.com/run2go/shell/main/profile -O ~/.profile
+wget -q https://raw.githubusercontent.com/run2go/shell/main/config/profile -O ~/.profile
 
 # Aqcuire latest aliases file
-wget -q https://raw.githubusercontent.com/run2go/shell/main/aliases -O ~/.aliases
+wget -q https://raw.githubusercontent.com/run2go/shell/main/config/aliases -O ~/.aliases
 
 # Initialize & configure shell
 case $desired_shell in
