@@ -1,9 +1,18 @@
 # Aliases
 
+# General aliases
+alias v='vi'
+alias s='ss -tlnu'
+
+# Add an "alert" alias for long running commands. Use like so: sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 # ls directory display
 if [ -x "$(command -v lsd)" ]; then
     alias ls='lsd'
     alias la='lsd -la'
+else
+    alias la='ls -la'
 fi
 # ranger file explorer
 if [ -x "$(command -v ranger)" ]; then
@@ -16,8 +25,12 @@ fi
 # cat substitution
 if [ -x "$(command -v batcat)" ]; then
     alias cat='batcat'
+    alias c='batcat'
 elif [ -x "$(command -v bat)" ]; then
     alias cat='bat'
+    alias c='bat'
+else
+    alias c='cat'
 fi
 
 # enable color support of ls and also add handy aliases
@@ -47,8 +60,8 @@ if [ -x "$(command -v docker)" ]; then
     alias docker='sudo docker'
     alias pa='sudo docker ps -a'
 elif [ -x "$(command -v podman)" ]; then
-    alias docker='sudo podman'
-    alias pa='sudo podman ps -a'
+    alias docker='podman'
+    alias pa='podman ps -a'
 fi
 
 # lazydocker & lazygit
@@ -61,15 +74,6 @@ if [ -x "$(command -v lazygit)" ]; then
 fi
 
 # CF quick tunnel
-if [ ! -f /usr/local/bin/tunnel.sh ]; then
+if [ -f /usr/local/bin/tunnel.sh ]; then
     alias tunnel='sudo /usr/local/bin/tunnel.sh'
 fi
-
-# General aliases
-alias la='ls -la'
-alias c='cat'
-alias v='vi'
-alias s='ss -tlnu'
-
-# Add an "alert" alias for long running commands. Use like so: sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
