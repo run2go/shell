@@ -84,15 +84,6 @@ esac
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# quick connect function for ssh access
-function connect {
-  case "$1" in
-    "server1") ssh root@localhost -p 22;;
-    "server2") ssh user@10.10.10.2 -p 1344;;
-    *) echo "Unknown Connection '$1'";;
-  esac
-}
-
 # .bash_aliases support
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -101,6 +92,18 @@ fi
 # general aliases support
 if [ -f ~/.aliases ]; then
     . ~/.aliases
+fi
+
+# local server connections, accessible via "connect" function
+#function connect {
+#  case "$1" in
+#    "p1") ssh root@10.10.10.11 -p 22;;
+#    "t1") sshpass -p pass ssh user@1.1.1.1;;
+#    *) echo "Unknown Connection '$1'";;
+#  esac
+#}
+if [ -f ~/.connect ]; then
+    . ~/.connect
 fi
 
 # define default editor
