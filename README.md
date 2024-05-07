@@ -3,6 +3,7 @@
 ## Aliases Overview
 | Alias | Command |
 | --- | --- |
+| s | ss -tlnu |
 | f | fzf |
 | r | ranger |
 | c | cat/batcat |
