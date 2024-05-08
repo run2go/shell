@@ -1,7 +1,6 @@
 # Aliases
 
 # General aliases
-alias v='vi'
 alias s='ss -tlnu'
 
 # Add an "alert" alias for long running commands. Use like so: sleep 10; alert
@@ -31,6 +30,14 @@ elif [ -x "$(command -v bat)" ]; then
     alias c='bat'
 else
     alias c='cat'
+fi
+# nvim
+if [ -x "$(command -v nvim)" ]; then
+    alias v='nvim'
+    alias vi='nvim'
+    alias vim='nvim'
+else
+    alias v='vi'
 fi
 
 # enable color support of ls and also add handy aliases
