@@ -37,7 +37,7 @@ init_sh() {
 
 init_bash() {
     desired_shell_name='/bin/bash'
-    install_dependencies curl bash vim bash sed jq git htop
+    install_dependencies curl bash vim sudo sed jq git htop
 
     # Load vimrc config
     curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/config/vimrc -o ~/.vimrc
@@ -73,7 +73,7 @@ init_bash() {
 
 init_zsh() {
     desired_shell_name='/bin/zsh'
-    install_dependencies curl bash
+    install_dependencies curl bash sudo
 
     bash -c "$(curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/zsh/setup.sh)"
 }
