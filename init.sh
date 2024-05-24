@@ -241,5 +241,7 @@ wget -q https://raw.githubusercontent.com/run2go/shell/main/config/aliases -O ~/
 export PS1="$prompt"
 
 # Start a new shell with the updated prompt & settings
-exec $parent_shell
-
+case "$parent_shell" in
+    bash) exec bash ;;
+    *) exec sh ;;
+esac
