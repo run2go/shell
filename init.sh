@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Example usage: ./init.sh 1    # Select machine "1" (local)
+
 # Function to get the current shell
 get_current_shell() {
     local current_shell
@@ -17,12 +19,8 @@ get_parent_shell() {
 supports_ansi() {
     # Assuming modern shells support ANSI
     case "$1" in
-        bash|zsh|ksh|ash)
-            return 0
-            ;;
-        *)
-            return 1
-            ;;
+        bash|zsh|ksh|ash) return 0 ;;
+        *) return 1 ;;
     esac
 }
 
@@ -241,6 +239,6 @@ wget -q https://raw.githubusercontent.com/run2go/shell/main/config/aliases -O ~/
 # Export PS1 to ensure it is applied
 export PS1="$prompt"
 
-# Start a new shell with the updated settings
+# Start a new shell with the updated prompt & settings
 exec $parent_shell
 
