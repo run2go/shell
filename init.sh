@@ -83,8 +83,8 @@ update_bash() {
     # Update PS1 prompt in bashrc file
     sed -i "0,/^DEFAULT_PROMPT='.*'/s//DEFAULT_PROMPT='$prompt'/" ~/.bashrc
 
-    # Execute bashrc file
-    . ~/.bashrc
+    # Execute bashrc file using bash
+    bash -c 'source ~/.bashrc'
 }
 
 check_installed() {
