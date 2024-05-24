@@ -210,14 +210,15 @@ done
 
 # Assign prompt_symbol
 case $desired_machine in
-    1) prompt_symbol='❯' ;; #local
-    2) prompt_symbol='›' ;; #quick
-    3) prompt_symbol='»' ;; #temp
-    4) prompt_symbol='⋙ ' ;; #test
-    5) prompt_symbol='⫺' ;; #dev
-    6) prompt_symbol='⪢' ;; #prod
-    7) prompt_symbol='⫸' ;; #host
-    *) echo "Invalid user: '$1'" ;;
+    1)  prompt_symbol='❯' ;; #local
+    2)  prompt_symbol='›' ;; #quick
+    3)  prompt_symbol='»' ;; #temp
+    4)  prompt_symbol='⋙ ' ;; #test
+    5)  prompt_symbol='⫺' ;; #dev
+    6)  prompt_symbol='⪢' ;; #prod
+    7)  prompt_symbol='⫸' ;; #host
+    *)  echo "Invalid machine: '$1'"
+        exit 1 ;;
 esac
 
 
