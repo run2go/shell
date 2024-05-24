@@ -86,7 +86,7 @@ update_bash() {
     sed -i "0,/^DEFAULT_PROMPT='.*'/s//DEFAULT_PROMPT='$prompt'/" ~/.bashrc
 
     # Execute bashrc file
-    source ~/.bashrc
+    . ~/.bashrc
 }
 
 check_installed() {
