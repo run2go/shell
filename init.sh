@@ -238,3 +238,6 @@ wget -q https://raw.githubusercontent.com/run2go/shell/main/config/aliases -O ~/
 
 # Export PS1 to ensure it is applied
 export PS1="$prompt"
+
+# Spawn new shell with updated PS1
+PS1="$prompt" $parent_shell
