@@ -8,13 +8,12 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-CURRENT_SHELL=$(getent passwd "$(whoami)" | cut -d: -f7)
-#if [ -n "$BASH_VERSION" ]; then
-if [ "$CURRENT_SHELL" = '/bin/zsh' ]; then
+# Source associated shell config
+if [ "$SHELL" = '/bin/zsh' ]; then
     if [ -f "$HOME/.zshrc" ]; then
         . "$HOME/.zshrc"
     fi
-elif [ "$CURRENT_SHELL" = '/bin/bash' ]; then
+elif [ "$SHELL" = '/bin/bash' ]; then
     if [ -f "$HOME/.bashrc" ]; then
         . "$HOME/.bashrc"
     fi
@@ -33,9 +32,4 @@ fi
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
-
-# import aliases file if it exists
-#if [ -f ~/.aliases ]; then
-#    . ~/.aliases
-#fi
 
