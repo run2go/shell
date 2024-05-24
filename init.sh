@@ -30,7 +30,7 @@ update_sh() {
     install_dependencies curl
 
     # Load latest shrc file
-    curl -fsSL https://raw.githubusercontent.com/run2go/shell/HEAD/sh/shrc -o ~/.shrc
+    curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/sh/shrc -o ~/.shrc
 
     # Decide on machine type
     case $detected_user in
@@ -53,10 +53,10 @@ update_bash() {
     install_dependencies curl bash vim sudo sed jq git htop
 
     # Load vimrc config
-    curl -fsSL https://raw.githubusercontent.com/run2go/shell/HEAD/config/vimrc -o ~/.vimrc
+    curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/config/vimrc -o ~/.vimrc
 
     # Load latest bashrc file
-    curl -fsSL https://raw.githubusercontent.com/run2go/shell/HEAD/bash/bashrc -o ~/.bashrc
+    curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/bash/bashrc -o ~/.bashrc
     
     # Decide on machine type
     case $detected_user in
@@ -233,10 +233,10 @@ fi
 
 
 # Overwrite default profile file
-wget -q https://raw.githubusercontent.com/run2go/shell/HEAD/config/profile -O ~/.profile
+wget -q https://raw.githubusercontent.com/run2go/shell/main/config/profile -O ~/.profile
 
 # Aqcuire latest aliases file
-wget -q https://raw.githubusercontent.com/run2go/shell/HEAD/config/aliases -O ~/.aliases
+wget -q https://raw.githubusercontent.com/run2go/shell/main/config/aliases -O ~/.aliases
 
 # Export PS1 to ensure it is applied
 export PS1="$prompt"
