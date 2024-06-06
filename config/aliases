@@ -77,7 +77,6 @@ fi
 if [ -x "$(command -v lazydocker)" ]; then
     alias d='lazydocker'
 fi
-
 if [ -x "$(command -v lazygit)" ]; then
     alias g='lazygit'
 fi
@@ -85,4 +84,9 @@ fi
 # CF quick tunnel
 if [ -f /usr/local/bin/tunnel.sh ]; then
     alias tunnel='sudo /usr/local/bin/tunnel.sh'
+fi
+
+# fuzzy find
+if [ -x "$(command -v fzf)" ]; then
+    alias f='vim $(fzf --preview="/bin/cat {}")'
 fi
