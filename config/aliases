@@ -88,5 +88,5 @@ fi
 
 # fuzzy find
 if [ -x "$(command -v fzf)" ]; then
-    alias f='vim $(fzf --preview="/bin/cat {}")'
+    alias f='file=$(fzf --preview="/bin/cat {}") && [ -n "$file" ] && vim "$file"'
 fi
