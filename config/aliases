@@ -23,10 +23,10 @@ if [ -x "$(command -v fzf)" ]; then
 fi
 # cat substitution
 if [ -x "$(command -v batcat)" ]; then
-    alias cat='batcat'
+    alias bat='batcat'
     alias c='batcat'
 elif [ -x "$(command -v bat)" ]; then
-    alias cat='bat'
+    #alias cat='bat'
     alias c='bat'
 else
     alias c='cat'
@@ -66,17 +66,16 @@ fi
 if [ -x "$(command -v docker)" ]; then
     alias docker='sudo docker'
     alias pa='sudo docker ps -a'
-    alias dc='sudo docker compose'
 elif [ -x "$(command -v podman)" ]; then
     alias docker='podman'
     alias pa='podman ps -a'
-    alias dc='podman compose'
 fi
 
 # lazydocker & lazygit
 if [ -x "$(command -v lazydocker)" ]; then
     alias d='lazydocker'
 fi
+
 if [ -x "$(command -v lazygit)" ]; then
     alias g='lazygit'
 fi
