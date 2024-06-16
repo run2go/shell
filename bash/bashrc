@@ -99,9 +99,17 @@ fi
 #  case "$1" in
 #    "p1") ssh root@10.10.10.11 -p 22;;
 #    "t1") sshpass -p pass ssh user@1.1.1.1;;
-#    *) echo "Unknown Connection '$1'";;
+#    *) 
+#      # Check if the hostname exists in the .ssh/config file
+#      if grep -qE "^Host\s+$1" ~/.ssh/config; then
+#        ssh "$1"
+#      else
+#        echo "Unknown Connection '$1'"
+#      fi
+#      ;;
 #  esac
 #}
+
 if [ -f ~/.connect ]; then
     . ~/.connect
 fi
