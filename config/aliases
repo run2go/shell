@@ -66,10 +66,12 @@ fi
 if [ -x "$(command -v docker)" ]; then
     alias docker='sudo docker'
     alias pa='sudo docker ps -a'
+    alias dc='sudo docker compose'
 elif [ -x "$(command -v podman)" ]; then
     alias docker='podman'
     alias pa='podman ps -a'
-fi
+    alias dc='podman compose'
+
 
 # lazydocker & lazygit
 if [ -x "$(command -v lazydocker)" ]; then
