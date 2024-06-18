@@ -71,7 +71,7 @@ elif [ -x "$(command -v podman)" ]; then
     alias docker='podman'
     alias pa='podman ps -a'
     alias dc='podman compose'
-
+fi
 
 # lazydocker & lazygit
 if [ -x "$(command -v lazydocker)" ]; then
