@@ -1,0 +1,8 @@
+[user]
+	name = run
+	email = run@global.mail
+[credential]
+	helper = store
+	
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+	path = ~/.gitconfig-github
