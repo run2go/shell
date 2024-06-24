@@ -1,0 +1,5 @@
+[user]
+	name = run2go
+	email = gh@mail.com
+[credential]
+	helper = store
