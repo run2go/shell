@@ -3,6 +3,7 @@
 ## Aliases Overview
 | Alias | Command |
 | --- | --- |
+| cl | clear |
 | s | ss -tlnu |
 | f | fzf |
 | r | ranger |
