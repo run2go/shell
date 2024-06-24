@@ -55,6 +55,10 @@ update_bash() {
 
     # Load latest bashrc file
     curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/bash/bashrc -o ~/.bashrc
+
+    # Load latest github config files
+    curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/config/gitconfig -o ~/.gitconfig
+    curl -fsSL https://raw.githubusercontent.com/run2go/shell/main/config/gitconfig-github -o ~/.gitconfig-github
     
     # Decide on machine type
     case $detected_user in
