@@ -1,3 +1,11 @@
+syntax on
 set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 set number
-syntax on
+set list
+set listchars
+set cursorline
+set relativenumber
+set scrolloff=8
+set signcolumn=yes
+set showcmd
+set conceallevel=1
