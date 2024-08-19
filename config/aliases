@@ -14,24 +14,29 @@ if [ -x "$(command -v lsd)" ]; then
 else
     alias la='ls -la'
 fi
+
 # ranger file explorer
 if [ -x "$(command -v ranger)" ]; then
     alias r='ranger'
 fi
+
 # fuzzy find
 if [ -x "$(command -v fzf)" ]; then
     alias f='fzf'
 fi
-# cat substitution
+
+# batcat
 if [ -x "$(command -v batcat)" ]; then
     alias bat='batcat'
     alias c='batcat'
-elif [ -x "$(command -v bat)" ]; then
-    #alias cat='bat'
-    alias c='bat'
+
+    # enable colored man pages leveraging batcat
+    export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+    export MANROFFOPT="-c"
 else
     alias c='cat'
 fi
+
 # nvim
 if [ -x "$(command -v nvim)" ]; then
     alias v='nvim'
