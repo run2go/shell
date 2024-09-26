@@ -97,3 +97,8 @@ fi
 if [ -x "$(command -v fzf)" ]; then
     alias f='fzf  -0 -1 --ansi --color=16 --preview-window=right:75% --preview="/bin/cat {}" --bind "enter:become(vim {})"'
 fi
+
+# check network config /etc/network/interfaces
+if [ -x "$(command -v fzf)" ]; then
+    alias netcheck='ifup -a --no-act ; echo "status: $?"'
+fi
