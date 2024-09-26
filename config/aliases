@@ -99,6 +99,6 @@ if [ -x "$(command -v fzf)" ]; then
 fi
 
 # check network config /etc/network/interfaces
-if [ -x "$(command -v fzf)" ]; then
+if [ -x "$(command -v ifup)" ]; then
     alias netcheck='ifup -a --no-act ; echo "status: $?"'
 fi
